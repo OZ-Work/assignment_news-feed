@@ -97,16 +97,16 @@ function getTitle() {
     MonthsRussian.December,
   ];
   const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = currentDate.toLocaleString("default", { month: "long" });
-  const day = currentDate.getMonth();
-  const monthRussian = months.at(
+  const [day, month, year] = currentDate.toLocaleString().split("/")
+
+  const formattedMonth = months.at(
     months.findIndex((m: MonthsRussian) => m === (month as MonthsRussian))
   );
+  const formattedYear = year.split(",").at(0)
 
   return (
     <span>
-      {day} {monthRussian} {year}
+      {day} {formattedMonth} {formattedYear}
     </span>
   );
 }
