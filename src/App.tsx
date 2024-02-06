@@ -50,7 +50,7 @@ function getArticleLoaders(numberOfArticles: number) {
 
   for (let i = 0; i < numberOfArticles; i++)
     articleLoaders.push(
-      <ContainerStyled>
+      <ContainerStyled key={i}>
         <MarginStyled $size={24} />
         <ArticleLoader />
       </ContainerStyled>
