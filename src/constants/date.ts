@@ -1,16 +1,16 @@
-import { MonthsRussian } from "../enums/urils";
+import { MonthsTranslate } from "enums/date";
 
-export const MonthsList = [
-  MonthsRussian.January,
-  MonthsRussian.February,
-  MonthsRussian.March,
-  MonthsRussian.April,
-  MonthsRussian.May,
-  MonthsRussian.June,
-  MonthsRussian.July,
-  MonthsRussian.August,
-  MonthsRussian.September,
-  MonthsRussian.October,
-  MonthsRussian.November,
-  MonthsRussian.December,
+export const MonthsTranslateList = [
+  MonthsTranslate.January,
+  MonthsTranslate.February,
+  MonthsTranslate.March,
+  MonthsTranslate.April,
+  MonthsTranslate.May,
+  MonthsTranslate.June,
+  MonthsTranslate.July,
+  MonthsTranslate.August,
+  MonthsTranslate.September,
+  MonthsTranslate.October,
+  MonthsTranslate.November,
+  MonthsTranslate.December,
 ];

@@ -1,6 +1,6 @@
 import { ArticleID } from "types/article";
 
-export async function fetchUpdatedArticlesList(
+export async function fetchMoreArticles(
   inView: boolean,
   fetchMore: Function,
   articles: ArticleID[]

@@ -7,9 +7,9 @@ import { POINT_URI } from "constants/api";
 import { useArticleIDs } from "hooks/apollo/useArticleIDs";
 import { useFirstRender } from "hooks/custom/useFirstRender";
 import { Spinner } from "styles/components.styles";
-import { fetchUpdatedArticlesList } from "utils/methods/fetch";
 import { GlobalStyle, GlobalTheme } from "styles/default.styles";
 import { NewsFeed } from "components/index";
+import { fetchMoreArticles } from "utils/fetch/fetchMoreArticles";
 
 const client = new ApolloClient({
   uri: POINT_URI,
@@ -21,12 +21,12 @@ function App() {
   const { data, loading, fetchMore } = useArticleIDs();
   const { isFirstRender } = useFirstRender();
 
-  if (inView) fetchUpdatedArticlesList(inView, fetchMore, data);
+  if (inView) fetchMoreArticles(inView, fetchMore, data);
   if (loading) return <Spinner />;
 
   return (
     <NewsFeed
-      articleIDs={data}
+      articleIds={data}
       scrollRef={scrollRef}
       isFirstRender={isFirstRender}
     />

@@ -5,7 +5,7 @@ import {
   FlexDirection,
   FlexJustify,
   PositionsProperty,
-} from "enums/styleProperties";
+} from "enums/style";
 import { replaceQuotes } from "utils/methods/string";
 import { SizeAndUnit } from "types/style";
 

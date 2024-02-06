@@ -2,26 +2,26 @@ import { MarginStyled } from "styles/spacing.styles";
 import { ContainerStyled, FlexStyled } from "styles/containers.styles";
 
 import {
+  BreakpointList,
   ColorSchema,
   FlexAlign,
   FlexDirection,
   FlexJustify,
   PositionsProperty,
-} from "enums/styleProperties";
+} from "enums/style";
 import { ParagraphStyled } from "styles/typography.styles";
 import { NewsArticle, PointLogo, ScrollToTopButton } from "components/index";
 import { useMediaQuery } from "hooks/custom/useMediaQuery";
-import { BreakpointList } from "enums/style";
-import { getFormattedDate } from "../../utils/methods/date";
+import { getFormattedDate } from "utils/methods/date";
 
 type NewsFeedProps = {
-  articleIDs: string[];
+  articleIds: string[];
   scrollRef: (node?: Element | null | undefined) => void;
   isFirstRender: boolean;
 };
 
 export default function NewsFeed({
-  articleIDs,
+  articleIds,
   scrollRef,
   isFirstRender,
 }: NewsFeedProps) {
@@ -57,7 +57,7 @@ export default function NewsFeed({
           >
             {dateHeaderDay} {dateHeaderMonth} {dateHeaderYear}
           </ParagraphStyled>
-          {getNewsArticles(articleIDs)}
+          {getNewsArticles(articleIds)}
         </ContainerStyled>
       </FlexStyled>
       {getScrollReferenceTarget(isFirstRender, scrollRef)}
@@ -65,12 +65,12 @@ export default function NewsFeed({
   );
 }
 
-function getNewsArticles(articleIDs: string[]) {
-  return articleIDs.map((articleID: string, index: number) => (
+function getNewsArticles(articleIds: string[]) {
+  return articleIds.map((articleId: string, index: number) => (
     <article key={index}>
       <ContainerStyled>
         <MarginStyled $size={24} />
-        <NewsArticle articleID={articleID} />
+        <NewsArticle articleId={articleId} />
       </ContainerStyled>
     </article>
   ));

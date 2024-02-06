@@ -9,13 +9,13 @@ import {
   NoSourceLogo,
 } from "styles/components.styles";
 import {
+  BreakpointList,
   ColorSchema,
   FlexAlign,
   FlexDirection,
   PositionsProperty,
-} from "enums/styleProperties";
+} from "enums/style";
 import { useMediaQuery } from "hooks/custom/useMediaQuery";
-import { BreakpointList } from "../../enums/style";
 
 type NewsPreviewInfoProps = {
   title: { long: string; short: string };
@@ -70,7 +70,6 @@ export default function NewsPreviewInfo({
 
 function getLogo(logo: string) {
   if (!logo) return <NoSourceLogo />;
-
   return (
     <FlexStyled>
       <ImageStyled alt="logo" src={logo} />
@@ -80,13 +79,11 @@ function getLogo(logo: string) {
 
 function getDayPlural(days: number) {
   if (days === 1) return <span>день назад</span>;
-
   return <span>дня назад</span>;
 }
 
 function getDescription(mediumUpBP: boolean, description: string) {
   if (!mediumUpBP) return null;
-
   return (
     <LimitedParagraphStyled
       $linesLimit={2}

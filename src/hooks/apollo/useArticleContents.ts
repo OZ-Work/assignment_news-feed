@@ -7,10 +7,10 @@ import {
   THUMBNAIL_URI,
 } from "constants/url";
 import { replaceHTMLEntities } from "utils/methods/string";
-import { ArticleParentType } from "enums/articleProperties";
+import { ArticleParentType } from "enums/article";
 
 export function useArticleContents(id: string) {
-  const GET_CONTENT = gql`
+  const GET_CONTENT = gql(`
         query GetContent{
             content(id: "${id}", project_id: "${PROJECT_ID}", full_url: "${FULL_URL}") {
                 parents {attachment type id dates{posted}}
@@ -24,7 +24,7 @@ export function useArticleContents(id: string) {
                 description {intro}
             }
         }
-    `;
+    `);
 
   const { data, loading, error } = useQuery(GET_CONTENT);
 

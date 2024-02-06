@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { ColorSchema } from "enums/styleProperties";
+import { ColorSchema } from "enums/style";
 import { replaceQuotes } from "utils/methods/string";
 import { ResponsiveSize, SizeAndUnit } from "types/style";
 import { MQ_LARGE_UP, MQ_MEDIUM_DOWN, MQ_MEDIUM_UP } from "constants/style";

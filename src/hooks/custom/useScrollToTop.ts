@@ -1,14 +1,15 @@
 import { useState } from "react";
+import { SCROLL_THRESHOLD } from "constants/style";
 
 export function useScrollToTop() {
-  const [isInView, setIsInView] = useState(false);
+  const [isScrollThreshold, setIsScrollThreshold] = useState(false);
 
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
-    setIsInView(scrolled > 100);
+    setIsScrollThreshold(scrolled > SCROLL_THRESHOLD);
   };
 
   window.addEventListener("scroll", toggleVisible);
 
-  return isInView;
+  return isScrollThreshold;
 }

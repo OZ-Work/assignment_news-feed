@@ -1,12 +1,11 @@
 import { MarginStyled } from "styles/spacing.styles";
 import { ContainerStyled } from "styles/containers.styles";
-import { ColorSchema, PositionsProperty } from "enums/styleProperties";
+import { BreakpointList, ColorSchema, PositionsProperty } from "enums/style";
 import { ImageStyled } from "styles/components.styles";
 import { POINT_LOGO } from "constants/url";
 import { ParagraphStyled } from "styles/typography.styles";
 import { LOGO_TITLE } from "constants/copy";
-import { useMediaQuery } from "../../../hooks/custom/useMediaQuery";
-import { BreakpointList } from "../../../enums/style";
+import { useMediaQuery } from "hooks/custom/useMediaQuery";
 
 export default function PointLogo() {
   const mediumDownBP = useMediaQuery(BreakpointList.MediumDown);

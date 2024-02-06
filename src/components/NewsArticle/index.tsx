@@ -4,11 +4,10 @@ import { Spinner } from "styles/components.styles";
 import { NewsPreviewCard, NewsPreviewInfo } from "components/index";
 
 type NewsArticleProps = {
-  articleID: string;
+  articleId: string;
 };
-export default function NewsArticle({ articleID }: NewsArticleProps) {
-  const { data, loading } = useArticleContents(articleID);
-
+export default function NewsArticle({ articleId }: NewsArticleProps) {
+  const { data, loading } = useArticleContents(articleId);
   if (loading)
     return (
       <FlexStyled>
@@ -17,7 +16,6 @@ export default function NewsArticle({ articleID }: NewsArticleProps) {
     );
 
   const { thumbnail, title, description, timestamp, logo } = data;
-
   return (
     <FlexStyled $gap={16}>
       <NewsPreviewCard imageUrl={thumbnail} imageAlt={title.short} />

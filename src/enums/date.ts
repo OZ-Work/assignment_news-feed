@@ -1,4 +1,4 @@
-export enum MonthsRussian {
+export enum MonthsTranslate {
   January = "января",
   February = "февраля",
   March = "марта",
