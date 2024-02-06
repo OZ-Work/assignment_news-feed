@@ -7,12 +7,11 @@ import { POINT_URI } from "constants/api";
 import { useArticleIDs } from "hooks/apollo/useArticleIDs";
 import { useFirstRender } from "hooks/custom/useFirstRender";
 import { GlobalStyle, GlobalTheme } from "styles/default.styles";
-import { ArticleLoader, NewsFeed, PointLogo } from "components/index";
+import { ArticleLoader, FeedCard, NewsFeed, PointLogo } from "components/index";
 import { fetchMoreArticles } from "utils/fetch/fetchMoreArticles";
 import { ContainerStyled, FlexStyled } from "./styles/containers.styles";
-import FeedCard from "./components/FeedCard";
-import { FETCH_LIMIT } from "./constants/apollo";
 import { MarginStyled } from "./styles/spacing.styles";
+import { FETCH_LIMIT } from "./constants/apollo";
 
 const client = new ApolloClient({
   uri: POINT_URI,

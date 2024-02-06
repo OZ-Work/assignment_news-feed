@@ -22,6 +22,7 @@ export enum ColorSchema {
   SecondaryGray = "secondaryGray",
   White = "white",
   MainOrange = "mainOrange",
+  Transparent = "transparent",
 }
 
 export enum PositionsProperty {

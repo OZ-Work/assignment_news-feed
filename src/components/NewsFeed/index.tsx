@@ -4,7 +4,7 @@ import { ParagraphStyled } from "styles/typography.styles";
 import { NewsArticle, ScrollToTopButton } from "components/index";
 import { getFormattedDate } from "utils/methods/date";
 import { useMediaQuery } from "hooks/custom/useMediaQuery";
-import { BreakpointList } from "enums/style";
+import { BreakpointList, ColorSchema } from "enums/style";
 import FeedCard from "components/FeedCard";
 
 type NewsFeedProps = {
@@ -60,5 +60,11 @@ function getScrollReferenceTarget(
   ref: (node?: Element | null | undefined) => void
 ) {
   if (isFirstRender) return null;
-  return <ContainerStyled ref={ref} $height={{ size: 1 }} />;
+  return (
+    <ContainerStyled
+      ref={ref}
+      $height={{ size: 1 }}
+      $backgroundColor={ColorSchema.Transparent}
+    />
+  );
 }

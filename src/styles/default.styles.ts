@@ -43,5 +43,6 @@ export const GlobalTheme = {
     secondaryGray: "#d2d2d2",
     white: "#FFFFFF",
     mainOrange: "#ff4700",
+    transparent: "transparent",
   },
 };
