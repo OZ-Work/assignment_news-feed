@@ -5,9 +5,9 @@ import {
   FlexDirection,
   FlexJustify,
   PositionsProperty,
-} from "@enums/styleProperties";
-import { replaceQuotes } from "@utils/methods/stringMutation";
-import { SizeAndUnit } from "../types/style";
+} from "enums/styleProperties";
+import { replaceQuotes } from "utils/methods/string";
+import { SizeAndUnit } from "types/style";
 
 export const FlexStyled = styled.div<{
   $justify?: FlexJustify;
@@ -17,19 +17,21 @@ export const FlexStyled = styled.div<{
   $position?: PositionsProperty;
 }>(
   ({ $justify, $align, $direction, $gap, $position }) => css`
-  display: flex;
-  flex-direction: ${$direction ?? FlexDirection.Row};
-  justify-content: ${$justify ?? FlexJustify.Center};
-  align-items: ${$align ?? FlexAlign.Start};
-  gap: ${$gap ?? 0}px;
-  flex: 1;
-  position ${$position ?? PositionsProperty.Default}
-`
+      display: flex;
+      flex-direction: ${$direction ?? FlexDirection.Row};
+      justify-content: ${$justify ?? FlexJustify.Center};
+      align-items: ${$align ?? FlexAlign.Start};
+      gap: ${$gap ?? 0}px;
+      flex: 1;
+      position ${$position ?? PositionsProperty.Default}
+    `
 );
 
 export const ContainerStyled = styled.div<{
   $width?: SizeAndUnit;
   $height?: SizeAndUnit;
+  $maxWidth?: SizeAndUnit;
+  $maxHeight?: SizeAndUnit;
   $margin?: number[];
   $padding?: number[];
   $radius?: number;
@@ -38,6 +40,8 @@ export const ContainerStyled = styled.div<{
 }>(
   ({
     theme: { colors },
+    $maxWidth,
+    $maxHeight,
     $width,
     $height,
     $margin,
@@ -48,6 +52,8 @@ export const ContainerStyled = styled.div<{
   }) => css`
     width: ${$width?.size}${$width?.unit ?? "px"};
     height: ${$height?.size}${$width?.unit ?? "px"};
+    max-width: ${$maxWidth?.size}${$maxWidth?.unit ?? "px"};
+    max-height: ${$maxHeight?.size}${$maxHeight?.unit ?? "px"};
     margin: ${$margin?.map((size: number) => String(size)).join("px ")}px;
     padding: ${$padding?.map((size: number) => String(size)).join("px ")}px;
     background-color: ${$backgroundColor

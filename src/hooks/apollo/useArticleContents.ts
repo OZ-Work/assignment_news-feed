@@ -1,13 +1,13 @@
 import moment from "moment";
 import { gql, useQuery } from "@apollo/client";
-import { PROJECT_ID } from "@constants/id";
+import { PROJECT_ID } from "constants/id";
 import {
   ARTICLE_SOURCE_LOGO_URI,
   FULL_URL,
   THUMBNAIL_URI,
-} from "@constants/url";
-import { replaceHTMLEntities } from "@utils/methods/stringMutation";
-import { ArticleParentType } from "@enums/articleProperties";
+} from "constants/url";
+import { replaceHTMLEntities } from "utils/methods/string";
+import { ArticleParentType } from "enums/articleProperties";
 
 export function useArticleContents(id: string) {
   const GET_CONTENT = gql`
@@ -20,9 +20,9 @@ export function useArticleContents(id: string) {
                 url
                 decoration
                 album {image source}
-                title {long} 
+                title {long short}
                 description {intro}
-          }
+            }
         }
     `;
 
@@ -42,7 +42,10 @@ export function useArticleContents(id: string) {
     )
     .asDays();
 
-  const title = replaceHTMLEntities(data?.content.title?.long);
+  const title = {
+    long: replaceHTMLEntities(data?.content.title?.long),
+    short: replaceHTMLEntities(data?.content.title?.short),
+  };
   const description = replaceHTMLEntities(data?.content.description.intro);
   const timestamp = String(Math.round(articleDate));
   const thumbnail = `${THUMBNAIL_URI}/${data?.content.thumbnail}`;

@@ -1,16 +1,18 @@
-import { MarginStyled } from "@styles/spacing.styles";
-import { ContainerStyled, FlexStyled } from "@styles/containers.styles";
-import { NewsArticle, ScrollToTopButton } from "@components/index";
+import { MarginStyled } from "styles/spacing.styles";
+import { ContainerStyled, FlexStyled } from "styles/containers.styles";
+
 import {
   ColorSchema,
   FlexAlign,
   FlexDirection,
   FlexJustify,
-} from "@enums/styleProperties";
-import { ParagraphStyled, Title } from "@styles/typography.styles";
-import { ImageStyled } from "@styles/components.styles";
-import { POINT_LOGO } from "@constants/url";
-import { MonthsRussian } from "@enums/urils";
+  PositionsProperty,
+} from "enums/styleProperties";
+import { ParagraphStyled } from "styles/typography.styles";
+import { NewsArticle, PointLogo, ScrollToTopButton } from "components/index";
+import { useMediaQuery } from "hooks/custom/useMediaQuery";
+import { BreakpointList } from "enums/style";
+import { getFormattedDate } from "../../utils/methods/date";
 
 type NewsFeedProps = {
   articleIDs: string[];
@@ -23,6 +25,15 @@ export default function NewsFeed({
   scrollRef,
   isFirstRender,
 }: NewsFeedProps) {
+  const smallDownBP = useMediaQuery(BreakpointList.SmallDown);
+  const mediumDownBP = useMediaQuery(BreakpointList.MediumDown);
+  const feedMargin = mediumDownBP ? [20, 0, 40] : [50, 0];
+  const {
+    day: dateHeaderDay,
+    month: dateHeaderMonth,
+    year: dateHeaderYear,
+  } = getFormattedDate(new Date());
+
   return (
     <>
       <FlexStyled
@@ -30,34 +41,24 @@ export default function NewsFeed({
         $justify={FlexJustify.Center}
         $direction={FlexDirection.Column}
       >
-        <MarginStyled $size={50} />
+        <PointLogo />
         <ContainerStyled
-          $backgroundColor={ColorSchema.MainGray}
-          $width={{ size: 170 }}
-          $height={{ size: 48 }}
-        >
-          <ImageStyled src={POINT_LOGO} />
-        </ContainerStyled>
-        <MarginStyled $size={5} />
-        <ParagraphStyled
-          $fontSize={{ size: 12 }}
-          $color={ColorSchema.SecondaryDark}
-        >
-          Думай и решай свободно
-        </ParagraphStyled>
-        <ContainerStyled
-          $width={{ size: 800 }}
-          $margin={[50, 0]}
+          $position={PositionsProperty.Relative}
+          $maxWidth={{ size: 800 }}
+          $margin={feedMargin}
           $backgroundColor={ColorSchema.White}
-          $padding={[24]}
+          $padding={[smallDownBP ? 8 : 24]}
           $radius={8}
         >
-          <Title $fontWeight={700} $fontSize={{ size: 28 }}>
-            {getTitle()}
-          </Title>
+          <ScrollToTopButton />
+          <ParagraphStyled
+            $fontWeight={700}
+            $fontSize={{ largeUp: mediumDownBP ? 24 : 28 }}
+          >
+            {dateHeaderDay} {dateHeaderMonth} {dateHeaderYear}
+          </ParagraphStyled>
           {getNewsArticles(articleIDs)}
         </ContainerStyled>
-        <ScrollToTopButton />
       </FlexStyled>
       {getScrollReferenceTarget(isFirstRender, scrollRef)}
     </>
@@ -74,39 +75,11 @@ function getNewsArticles(articleIDs: string[]) {
     </article>
   ));
 }
+
 function getScrollReferenceTarget(
   isFirstRender: boolean,
   ref: (node?: Element | null | undefined) => void
 ) {
   if (isFirstRender) return null;
   return <ContainerStyled ref={ref} $height={{ size: 1 }} />;
-}
-function getTitle() {
-  const months = [
-    MonthsRussian.January,
-    MonthsRussian.February,
-    MonthsRussian.March,
-    MonthsRussian.April,
-    MonthsRussian.May,
-    MonthsRussian.June,
-    MonthsRussian.July,
-    MonthsRussian.August,
-    MonthsRussian.September,
-    MonthsRussian.October,
-    MonthsRussian.November,
-    MonthsRussian.December,
-  ];
-  const currentDate = new Date();
-  const [day, month, year] = currentDate.toLocaleString().split("/")
-
-  const formattedMonth = months.at(
-    months.findIndex((m: MonthsRussian) => m === (month as MonthsRussian))
-  );
-  const formattedYear = year.split(",").at(0)
-
-  return (
-    <span>
-      {day} {formattedMonth} {formattedYear}
-    </span>
-  );
 }

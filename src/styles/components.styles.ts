@@ -1,6 +1,14 @@
 import styled, { css } from "styled-components";
+import {
+  MQ_LARGE_DOWN,
+  MQ_LARGE_UP,
+  MQ_SMALL_DOWN,
+  MQ_SMALL_UP,
+} from "constants/style";
+import { ResponsiveSize } from "types/style";
+import { ParagraphStyled } from "styles/typography.styles";
 
-export const ArticleTitle = styled.h3`
+export const ArticleTitleStyled = styled(ParagraphStyled)`
   transition: 0.1s ease;
   cursor: pointer;
 
@@ -8,6 +16,26 @@ export const ArticleTitle = styled.h3`
     color: ${(props) => props.theme.colors.mainOrange};
   }
 `;
+
+export const ImageContainerStyled = styled.div<{
+  $width?: ResponsiveSize;
+  $radius?: number;
+}>(
+  ({ $width, $radius }) => css`
+    width: ${$width?.largeUp}${$width?.largeUp ?? "px"};
+    border-radius: ${$radius ?? 0}px;
+
+    ${MQ_SMALL_DOWN(css`
+      width: ${$width?.smallDown}px;
+    `)}
+    ${MQ_SMALL_UP(css`
+      width: ${$width?.smallUp}px;
+    `)}
+      ${MQ_LARGE_UP(css`
+      width: ${$width?.largeUp}px;
+    `)}
+  `
+);
 export const ImageStyled = styled.img`
   height: 100%;
   width: 100%;
@@ -34,7 +62,7 @@ export const Spinner = styled.div<{ $size?: number }>(
     border: 8px solid #0000;
     border-right-color: ${colors.mainOrange};
     position: relative;
-    animation: l24 1s infinite linear;
+    animation: logo 1s infinite linear;
 
     &:after,
     &:before {
@@ -51,7 +79,7 @@ export const Spinner = styled.div<{ $size?: number }>(
       animation-duration: 4s;
     }
 
-    @keyframes l24 {
+    @keyframes logo {
       100% {
         transform: rotate(1turn);
       }
@@ -61,6 +89,7 @@ export const Spinner = styled.div<{ $size?: number }>(
 
 export const ScrollToTopButtonStyled = styled.button(
   ({ theme: { colors } }) => css`
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,10 +97,13 @@ export const ScrollToTopButtonStyled = styled.button(
     height: 24px;
     background-color: ${colors.secondaryGray};
     border-radius: 6px;
-    position: sticky;
-    margin-left: -60%;
-    bottom: 50px;
     border: none;
     cursor: pointer;
+    bottom: 50px;
+    margin-left: -5%;
+
+    ${MQ_LARGE_DOWN(css`
+      display: none;
+    `)}
   `
 );

@@ -1,15 +1,15 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { useArticleIDs } from "@hooks/apollo/useArticleIDs";
-import { NewsFeed } from "@components/index";
-import { GlobalStyle, GlobalTheme } from "@styles/default.styles";
 import { ThemeProvider } from "styled-components";
-import { POINT_URI } from "@constants/api";
-import { Spinner } from "@styles/components.styles";
 import { useInView } from "react-intersection-observer";
-import { fetchUpdatedArticlesList } from "@utils/methods/fetch";
-import { useFirstRender } from "@hooks/custom/useFirstRender";
+import { POINT_URI } from "constants/api";
+import { useArticleIDs } from "hooks/apollo/useArticleIDs";
+import { useFirstRender } from "hooks/custom/useFirstRender";
+import { Spinner } from "styles/components.styles";
+import { fetchUpdatedArticlesList } from "utils/methods/fetch";
+import { GlobalStyle, GlobalTheme } from "styles/default.styles";
+import { NewsFeed } from "components/index";
 
 const client = new ApolloClient({
   uri: POINT_URI,

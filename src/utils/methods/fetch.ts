@@ -1,4 +1,4 @@
-import { ArticleID } from "../../types/article";
+import { ArticleID } from "types/article";
 
 export async function fetchUpdatedArticlesList(
   inView: boolean,

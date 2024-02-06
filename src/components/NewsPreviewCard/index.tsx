@@ -1,5 +1,4 @@
-import { ImageStyled } from "@styles/components.styles";
-import { ContainerStyled } from "@styles/containers.styles";
+import { ImageContainerStyled, ImageStyled } from "styles/components.styles";
 
 type NewsPreviewCardProps = { imageUrl: string; imageAlt: string };
 export default function NewsPreviewCard({
@@ -7,8 +6,11 @@ export default function NewsPreviewCard({
   imageAlt,
 }: NewsPreviewCardProps) {
   return (
-    <ContainerStyled $width={{ size: 240 }} $radius={4}>
+    <ImageContainerStyled
+      $width={{ smallDown: 144, smallUp: 200, largeUp: 240 }}
+      $radius={4}
+    >
       <ImageStyled alt={imageAlt} src={imageUrl} />
-    </ContainerStyled>
+    </ImageContainerStyled>
   );
 }

@@ -1,7 +1,7 @@
 {
-  "extends": "./paths.json",
   "compilerOptions": {
-    "target": "es6",
+    "baseUrl": "src",
+    "target": "ESNext",
     "lib": [
       "dom",
       "dom.iterable",

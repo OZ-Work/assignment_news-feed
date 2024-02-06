@@ -1,13 +1,16 @@
-import { ScrollToTopButtonStyled } from "@styles/components.styles";
-import { ArrowLogo } from "@components/index";
+import { ScrollToTopButtonStyled } from "styles/components.styles";
+import ArrowLogo from "components/Logos/ArrowLogo";
+import { useScrollToTop } from "hooks/custom/useScrollToTop";
 
 export default function ScrollToTopButton() {
-  const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const isInView = useScrollToTop();
+
+  if (!isInView) return null;
 
   return (
-    <ScrollToTopButtonStyled onClick={handleClick}>
+    <ScrollToTopButtonStyled
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+    >
       <ArrowLogo />
     </ScrollToTopButtonStyled>
   );

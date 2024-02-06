@@ -1,7 +1,7 @@
-import { FlexStyled } from "@styles/containers.styles";
-import { useArticleContents } from "@hooks/apollo/useArticleContents";
-import { NewsPreviewCard, NewsPreviewInfo } from "@components/index";
-import { Spinner } from "@styles/components.styles";
+import { FlexStyled } from "styles/containers.styles";
+import { useArticleContents } from "hooks/apollo/useArticleContents";
+import { Spinner } from "styles/components.styles";
+import { NewsPreviewCard, NewsPreviewInfo } from "components/index";
 
 type NewsArticleProps = {
   articleID: string;
@@ -20,7 +20,7 @@ export default function NewsArticle({ articleID }: NewsArticleProps) {
 
   return (
     <FlexStyled $gap={16}>
-      <NewsPreviewCard imageUrl={thumbnail} imageAlt={title} />
+      <NewsPreviewCard imageUrl={thumbnail} imageAlt={title.short} />
       <NewsPreviewInfo
         title={title}
         description={description}
