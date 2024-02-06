@@ -6,10 +6,13 @@ import { useInView } from "react-intersection-observer";
 import { POINT_URI } from "constants/api";
 import { useArticleIDs } from "hooks/apollo/useArticleIDs";
 import { useFirstRender } from "hooks/custom/useFirstRender";
-import { Spinner } from "styles/components.styles";
 import { GlobalStyle, GlobalTheme } from "styles/default.styles";
-import { NewsFeed } from "components/index";
+import { ArticleLoader, NewsFeed, PointLogo } from "components/index";
 import { fetchMoreArticles } from "utils/fetch/fetchMoreArticles";
+import { ContainerStyled, FlexStyled } from "./styles/containers.styles";
+import FeedCard from "./components/FeedCard";
+import { FETCH_LIMIT } from "./constants/apollo";
+import { MarginStyled } from "./styles/spacing.styles";
 
 const client = new ApolloClient({
   uri: POINT_URI,
@@ -22,15 +25,39 @@ function App() {
   const { isFirstRender } = useFirstRender();
 
   if (inView) fetchMoreArticles(inView, fetchMore, data);
-  if (loading) return <Spinner />;
 
+  if (loading)
+    return (
+      <FeedCard>
+        <>{getArticleLoaders(FETCH_LIMIT)}</>
+      </FeedCard>
+    );
   return (
-    <NewsFeed
-      articleIds={data}
-      scrollRef={scrollRef}
-      isFirstRender={isFirstRender}
-    />
+    <>
+      <FlexStyled>
+        <PointLogo />
+      </FlexStyled>
+      <NewsFeed
+        articleIds={data}
+        scrollRef={scrollRef}
+        isFirstRender={isFirstRender}
+      />
+    </>
   );
+}
+
+function getArticleLoaders(numberOfArticles: number) {
+  const articleLoaders = [];
+
+  for (let i = 0; i < numberOfArticles; i++)
+    articleLoaders.push(
+      <ContainerStyled>
+        <MarginStyled $size={24} />
+        <ArticleLoader />
+      </ContainerStyled>
+    );
+
+  return articleLoaders;
 }
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

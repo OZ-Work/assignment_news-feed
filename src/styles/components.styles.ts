@@ -54,39 +54,6 @@ export const NoSourceLogo = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export const Spinner = styled.div<{ $size?: number }>(
-  ({ theme: { colors }, $size }) => css`
-    width: ${$size ?? 40}px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 8px solid #0000;
-    border-right-color: ${colors.mainOrange};
-    position: relative;
-    animation: logo 1s infinite linear;
-
-    &:after,
-    &:before {
-      content: "";
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: inherit;
-      animation: inherit;
-      animation-duration: 2s;
-    }
-
-    &:after {
-      animation-duration: 4s;
-    }
-
-    @keyframes logo {
-      100% {
-        transform: rotate(1turn);
-      }
-    }
-  `
-);
-
 export const ScrollToTopButtonStyled = styled.button(
   ({ theme: { colors } }) => css`
     position: fixed;

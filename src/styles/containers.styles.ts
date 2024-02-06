@@ -37,6 +37,7 @@ export const ContainerStyled = styled.div<{
   $radius?: number;
   $backgroundColor?: ColorSchema;
   $position?: PositionsProperty;
+  $flexGrow?: number;
 }>(
   ({
     theme: { colors },
@@ -49,6 +50,7 @@ export const ContainerStyled = styled.div<{
     $radius,
     $backgroundColor,
     $position,
+    $flexGrow,
   }) => css`
     width: ${$width?.size}${$width?.unit ?? "px"};
     height: ${$height?.size}${$width?.unit ?? "px"};
@@ -62,5 +64,10 @@ export const ContainerStyled = styled.div<{
     border-radius: ${$radius ?? 0}px;
     position: ${$position ?? PositionsProperty.Default};
     overflow: hidden;
+    flex-grow: ${$flexGrow ?? 0};
   `
 );
+
+export const FlexGrowStyled = styled.div`
+  flex-grow: 1;
+`;

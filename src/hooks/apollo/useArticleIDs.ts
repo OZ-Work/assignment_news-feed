@@ -1,21 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { FETCH_LIMIT } from "constants/apollo";
+import { getIds } from "schemas/getIds";
 
 export function useArticleIDs() {
-  const GET_IDS = gql(`
-    query GetIDs($take: Int, $skip: Int) {
-      contents(
-        project_id: "5107de83-f208-4ca4-87ed-9b69d58d16e1"
-        lang: "ru"
-        skip: $skip
-        take: $take
-      ) {
-        id
-      }
-    }
-  `);
-
-  const { data, loading, error, fetchMore } = useQuery(GET_IDS, {
+  const { data, loading, error, fetchMore } = useQuery(getIds(), {
     variables: { take: FETCH_LIMIT, skip: 0 },
   });
 

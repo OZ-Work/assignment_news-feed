@@ -44,7 +44,9 @@ export default function NewsPreviewInfo({
       >
         {mediumUpBP ? title.long : title.short}
       </ArticleTitleStyled>
+
       {getDescription(mediumUpBP, description)}
+
       <FlexStyled $gap={5} $align={FlexAlign.Center}>
         <ContainerStyled
           $position={PositionsProperty.Relative}
@@ -57,6 +59,7 @@ export default function NewsPreviewInfo({
         >
           {getLogo(logo)}
         </ContainerStyled>
+
         <ParagraphStyled
           $fontSize={{ mediumDown: 11, mediumUp: 11, largeUp: 12 }}
           $color={ColorSchema.SecondaryDark}

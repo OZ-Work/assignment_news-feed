@@ -1,18 +1,11 @@
 import { MarginStyled } from "styles/spacing.styles";
-import { ContainerStyled, FlexStyled } from "styles/containers.styles";
-
-import {
-  BreakpointList,
-  ColorSchema,
-  FlexAlign,
-  FlexDirection,
-  FlexJustify,
-  PositionsProperty,
-} from "enums/style";
+import { ContainerStyled } from "styles/containers.styles";
 import { ParagraphStyled } from "styles/typography.styles";
-import { NewsArticle, PointLogo, ScrollToTopButton } from "components/index";
-import { useMediaQuery } from "hooks/custom/useMediaQuery";
+import { NewsArticle, ScrollToTopButton } from "components/index";
 import { getFormattedDate } from "utils/methods/date";
+import { useMediaQuery } from "hooks/custom/useMediaQuery";
+import { BreakpointList } from "enums/style";
+import FeedCard from "components/FeedCard";
 
 type NewsFeedProps = {
   articleIds: string[];
@@ -25,9 +18,7 @@ export default function NewsFeed({
   scrollRef,
   isFirstRender,
 }: NewsFeedProps) {
-  const smallDownBP = useMediaQuery(BreakpointList.SmallDown);
   const mediumDownBP = useMediaQuery(BreakpointList.MediumDown);
-  const feedMargin = mediumDownBP ? [20, 0, 40] : [50, 0];
   const {
     day: dateHeaderDay,
     month: dateHeaderMonth,
@@ -36,20 +27,8 @@ export default function NewsFeed({
 
   return (
     <>
-      <FlexStyled
-        $align={FlexAlign.Center}
-        $justify={FlexJustify.Center}
-        $direction={FlexDirection.Column}
-      >
-        <PointLogo />
-        <ContainerStyled
-          $position={PositionsProperty.Relative}
-          $maxWidth={{ size: 800 }}
-          $margin={feedMargin}
-          $backgroundColor={ColorSchema.White}
-          $padding={[smallDownBP ? 8 : 24]}
-          $radius={8}
-        >
+      <FeedCard>
+        <>
           <ScrollToTopButton />
           <ParagraphStyled
             $fontWeight={700}
@@ -58,8 +37,8 @@ export default function NewsFeed({
             {dateHeaderDay} {dateHeaderMonth} {dateHeaderYear}
           </ParagraphStyled>
           {getNewsArticles(articleIds)}
-        </ContainerStyled>
-      </FlexStyled>
+        </>
+      </FeedCard>
       {getScrollReferenceTarget(isFirstRender, scrollRef)}
     </>
   );
