@@ -11,8 +11,7 @@ import {
 import { getFormattedDate } from "utils/methods/date";
 import { useMediaQuery } from "hooks/custom/useMediaQuery";
 import { BreakpointList, ColorSchema } from "enums/style";
-import React from "react";
-import { FETCH_LIMIT } from "../../constants/apollo";
+import { FETCH_LIMIT } from "constants/api";
 
 type NewsFeedProps = {
   isLoading: boolean;
@@ -90,6 +89,7 @@ function getScrollReferenceTarget(
   ref: (node?: Element | null | undefined) => void
 ) {
   if (isFirstRender) return null;
+
   return (
     <ContainerStyled
       ref={ref}

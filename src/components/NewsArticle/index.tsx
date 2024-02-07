@@ -15,6 +15,7 @@ export default function NewsArticle({ articleId }: NewsArticleProps) {
   if (loading) return <ArticleLoader />;
 
   const { thumbnail, title, description, timestamp, logo } = data;
+
   return (
     <FlexStyled $gap={16}>
       <NewsPreviewCard imageUrl={thumbnail} imageAlt={title.short} />

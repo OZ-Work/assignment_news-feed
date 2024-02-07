@@ -83,6 +83,7 @@ export default function NewsPreviewInfo({
 
 function getLogo(logo: string) {
   if (!logo) return <NoSourceLogo />;
+
   return (
     <FlexStyled>
       <ImageStyled alt="logo" src={logo} />
@@ -97,6 +98,7 @@ function getDayPlural(days: number) {
 
 function getDescription(mediumUpBP: boolean, description: string) {
   if (!mediumUpBP) return null;
+
   return (
     <LimitedParagraphStyled
       $linesLimit={2}

@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { FETCH_LIMIT } from "constants/apollo";
+import { FETCH_LIMIT } from "constants/api";
 import { getIds } from "schemas/getIds";
 
 export function useArticleIDs() {

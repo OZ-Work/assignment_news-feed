@@ -1,6 +1,7 @@
 import { ImageContainerStyled, ImageStyled } from "styles/components.styles";
 
 type NewsPreviewCardProps = { imageUrl: string; imageAlt: string };
+
 export default function NewsPreviewCard({
   imageUrl,
   imageAlt,

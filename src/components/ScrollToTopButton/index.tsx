@@ -6,6 +6,7 @@ export default function ScrollToTopButton() {
   const isScrollThreshold = useScrollToTop();
 
   if (!isScrollThreshold) return null;
+
   return (
     <ScrollToTopButtonStyled
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

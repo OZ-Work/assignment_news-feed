@@ -1,4 +1,5 @@
 import { ArticleID } from "types/article";
+import { FETCH_LIMIT } from "constants/api";
 
 export async function fetchMoreArticles(
   inView: boolean,
@@ -7,7 +8,7 @@ export async function fetchMoreArticles(
 ) {
   if (inView) {
     await fetchMore({
-      variables: { take: 10, skip: articles.length },
+      variables: { take: FETCH_LIMIT, skip: articles.length },
       updateQuery: (
         previousArticles: { contents: ArticleID[] },
         data: {
