@@ -11,6 +11,7 @@ type NewsArticleProps = {
 };
 export default function NewsArticle({ articleId }: NewsArticleProps) {
   const { data, loading } = useArticleContents(articleId);
+
   if (loading) return <ArticleLoader />;
 
   const { thumbnail, title, description, timestamp, logo } = data;

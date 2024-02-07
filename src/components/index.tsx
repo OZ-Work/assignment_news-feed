@@ -6,4 +6,4 @@ export { default as PointLogo } from "components/Logos/PointLogo";
 export { default as ArrowLogo } from "components/Logos/ArrowLogo";
 export { default as ScrollToTopButton } from "components/ScrollToTopButton";
 export { default as ArticleLoader } from "components/ArticleLoader";
-export { default as FeedCard } from "components/FeedCard";
+export { default as PageCard } from "components/PageCard";

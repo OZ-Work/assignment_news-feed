@@ -16,11 +16,12 @@ import {
   PositionsProperty,
 } from "enums/style";
 import { useMediaQuery } from "hooks/custom/useMediaQuery";
+import { getFormattedDate } from "utils/methods/date";
 
 type NewsPreviewInfoProps = {
   title: { long: string; short: string };
   description: string;
-  timestamp: string;
+  timestamp: { date: string; daysSince: string };
   logo: string;
 };
 
@@ -31,6 +32,11 @@ export default function NewsPreviewInfo({
   logo,
 }: NewsPreviewInfoProps) {
   const mediumUpBP = useMediaQuery(BreakpointList.MediumUp);
+  const {
+    day: dateHeaderDay,
+    month: dateHeaderMonth,
+    year: dateHeaderYear,
+  } = getFormattedDate(new Date(Number(timestamp.date)));
 
   return (
     <FlexStyled
@@ -64,7 +70,11 @@ export default function NewsPreviewInfo({
           $fontSize={{ mediumDown: 11, mediumUp: 11, largeUp: 12 }}
           $color={ColorSchema.SecondaryDark}
         >
-          {timestamp} {getDayPlural(Number(timestamp))}
+          {dateHeaderDay} {dateHeaderMonth} {dateHeaderYear}{" "}
+          <span>
+            ( {timestamp.daysSince} {getDayPlural(Number(timestamp.daysSince))}{" "}
+            )
+          </span>
         </ParagraphStyled>
       </FlexStyled>
     </FlexStyled>

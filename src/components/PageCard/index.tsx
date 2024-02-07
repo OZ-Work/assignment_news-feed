@@ -4,7 +4,7 @@ import React, { ReactElement } from "react";
 import { useMediaQuery } from "hooks/custom/useMediaQuery";
 
 type FeedCardProps = { children: ReactElement };
-export default function FeedCard({ children }: FeedCardProps) {
+export default function PageCard({ children }: FeedCardProps) {
   const smallDownBP = useMediaQuery(BreakpointList.SmallDown);
   const mediumDownBP = useMediaQuery(BreakpointList.MediumDown);
   const feedMargin = mediumDownBP ? [20, 0, 40] : [50, 0];

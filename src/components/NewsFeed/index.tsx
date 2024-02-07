@@ -1,19 +1,28 @@
 import { MarginStyled } from "styles/spacing.styles";
-import { ContainerStyled } from "styles/containers.styles";
+import { ContainerStyled, FlexStyled } from "styles/containers.styles";
 import { ParagraphStyled } from "styles/typography.styles";
-import { NewsArticle, ScrollToTopButton } from "components/index";
+import {
+  ArticleLoader,
+  NewsArticle,
+  PageCard,
+  PointLogo,
+  ScrollToTopButton,
+} from "components/index";
 import { getFormattedDate } from "utils/methods/date";
 import { useMediaQuery } from "hooks/custom/useMediaQuery";
 import { BreakpointList, ColorSchema } from "enums/style";
-import FeedCard from "components/FeedCard";
+import React from "react";
+import { FETCH_LIMIT } from "../../constants/apollo";
 
 type NewsFeedProps = {
+  isLoading: boolean;
   articleIds: string[];
   scrollRef: (node?: Element | null | undefined) => void;
   isFirstRender: boolean;
 };
 
 export default function NewsFeed({
+  isLoading,
   articleIds,
   scrollRef,
   isFirstRender,
@@ -27,7 +36,10 @@ export default function NewsFeed({
 
   return (
     <>
-      <FeedCard>
+      <FlexStyled>
+        <PointLogo />
+      </FlexStyled>
+      <PageCard>
         <>
           <ScrollToTopButton />
           <ParagraphStyled
@@ -36,15 +48,33 @@ export default function NewsFeed({
           >
             {dateHeaderDay} {dateHeaderMonth} {dateHeaderYear}
           </ParagraphStyled>
-          {getNewsArticles(articleIds)}
+          {getNewsArticles(articleIds, isLoading, FETCH_LIMIT)}
         </>
-      </FeedCard>
+      </PageCard>
       {getScrollReferenceTarget(isFirstRender, scrollRef)}
     </>
   );
 }
 
-function getNewsArticles(articleIds: string[]) {
+function getNewsArticles(
+  articleIds: string[],
+  isLoading: boolean,
+  numberOfLoaders: number
+) {
+  if (isLoading) {
+    const articleLoaders = [];
+
+    for (let i = 0; i < numberOfLoaders; i++)
+      articleLoaders.push(
+        <ContainerStyled key={i}>
+          <MarginStyled $size={24} />
+          <ArticleLoader />
+        </ContainerStyled>
+      );
+
+    return articleLoaders;
+  }
+
   return articleIds.map((articleId: string, index: number) => (
     <article key={index}>
       <ContainerStyled>

@@ -8,33 +8,57 @@ import { getArticleContents } from "schemas/getArticleContents";
 export function useArticleContents(id: string) {
   const { data, loading, error } = useQuery(getArticleContents(id));
 
-  const parentSourceIndex = data?.content.parents.findIndex(
+  if (loading)
+    return {
+      data: null,
+      loading,
+      error,
+    };
+
+  const {
+    content: {
+      parents,
+      description: unformattedDescription,
+      thumbnail: thumbnailName,
+      title: unformattedTitle,
+    },
+  } = data;
+
+  const parentSourceIndex = parents.findIndex(
     (parent: { type: string; id: string; attachment: string }) =>
       parent.type === ArticleParentType.Source
   );
-  const parentSource = data?.content.parents.at(parentSourceIndex);
-
-  const articleDate = moment
-    .duration(
-      moment(new Date()).diff(
-        moment(new Date(Number(parentSource?.dates.posted)))
+  const parentSource = parents.at(parentSourceIndex);
+  const articleDate = Math.round(
+    moment
+      .duration(
+        moment(new Date()).diff(
+          moment(new Date(Number(parentSource?.dates.posted)))
+        )
       )
-    )
-    .asDays();
-  const timestamp = String(Math.round(articleDate));
-  const description = replaceHTMLEntities(data?.content.description.intro);
-  const thumbnail = `${THUMBNAIL_URI}/${data?.content.thumbnail}`;
-  const logo = parentSource?.attachment
-    ? `${ARTICLE_SOURCE_LOGO_URI}/${parentSource.attachment}`
-    : "";
+      .asDays()
+  );
+
   const title = {
-    long: replaceHTMLEntities(data?.content.title?.long),
-    short: replaceHTMLEntities(data?.content.title?.short),
+    long: replaceHTMLEntities(unformattedTitle?.long),
+    short: replaceHTMLEntities(unformattedTitle?.short),
   };
+  const description = replaceHTMLEntities(unformattedDescription.intro);
+  const thumbnail = `${THUMBNAIL_URI}/${thumbnailName}`;
+  const timestamp = {
+    date: parentSource?.dates.posted,
+    daysSince: String(articleDate),
+  };
+  const logo = getLogo(parentSource?.attachment);
 
   return {
     data: { id, timestamp, description, thumbnail, logo, title },
     loading,
     error,
   };
+}
+
+function getLogo(attachment: string) {
+  if (!attachment) return "";
+  return `${ARTICLE_SOURCE_LOGO_URI}/${attachment}`;
 }
